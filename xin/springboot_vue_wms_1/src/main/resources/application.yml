@@ -1,0 +1,17 @@
+server:
+  port: 8004
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+  datasource:
+   url: jdbc:mysql://192.168.62.131:3306/wms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT&B8
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   username: root
+   password: root
+
+file:
+  upload: F:/upload
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
