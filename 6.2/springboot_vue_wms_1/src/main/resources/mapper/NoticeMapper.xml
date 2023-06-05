@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.wms.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.demo.wms.entity.Notice">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,content,
+        create_time,create_user
+    </sql>
+
+    <select id="countUnread" resultType="int" resultMap="BaseResultMap">
+        select * from notice n
+        <where>
+            not exists (
+                select * from notice_user u where uid = #{id} and u.nid= n.id
+            )
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>
